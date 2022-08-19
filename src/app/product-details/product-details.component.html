@@ -1,0 +1,171 @@
+<div *ngIf="product">
+  <div class="product-center">
+    <div class="product-heading">
+      <h1>{{ product.title }}</h1>
+    </div>
+    <div class="product-images">
+      <img [src]="product.images[0]" />
+    </div>
+    <div class="product-labels">
+      <div class="product-label">
+        <label><b>Price:</b></label>
+        <span>${{ product.price }}</span>
+      </div>
+
+      <div class="product-label">
+        <label><b>Discount:</b></label>
+        <span>{{ product.discountPercentage }}%</span>
+      </div>
+
+      <div class="product-label">
+        <label><b>Category:</b></label>
+        <span>{{ product.category }}</span>
+      </div>
+
+      <div class="product-label">
+        <label><b>Description:</b></label>
+        <span>{{ product.description }}</span>
+      </div>
+
+      <div class="product-label">
+        <label><b>Stock:</b></label>
+        <span>{{ product.stock }}</span>
+      </div>
+
+      <div class="product-label">
+        <label><b>Brand:</b></label>
+        <span>{{ product.brand }}</span>
+      </div>
+
+      <div class="product-label">
+        <label><b>Rating:</b></label>
+        <span>{{ product.rating }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-form" *ngIf="productForm && appConstant">
+    <form
+      class="example-form"
+      novalidate
+      (ngSubmit)="onSubmit(productForm.value, productForm.valid)"
+      [formGroup]="productForm"
+    >
+      <div class="grid center">
+        <div class="col-12 md:col-6 lg:col-3 sm:flex-nowrap">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="{{ appConstant.forms.product.title }}"
+              placeholder="Title"
+            />
+            <mat-error *ngIf="productForm.get('title').hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea
+              type="text"
+              matInput
+              formControlName="{{ appConstant.forms.product.description }}"
+              placeholder="Description"
+            ></textarea>
+            <mat-error
+              *ngIf="productForm.get('description').hasError('required')"
+            >
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Category</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="{{ appConstant.forms.product.category }}"
+              placeholder="Category"
+            />
+            <mat-error *ngIf="productForm.get('category').hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Price</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="{{ appConstant.forms.product.price }}"
+              placeholder="Price"
+            />
+            <mat-error *ngIf="productForm.get('price').hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Stock</mat-label>
+            <input
+              type="number"
+              matInput
+              formControlName="{{ appConstant.forms.product.stock }}"
+              placeholder="Stock"
+            />
+            <mat-error *ngIf="productForm.get('stock').hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Brand</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="{{ appConstant.forms.product.brand }}"
+              placeholder="Brand"
+            />
+            <mat-error *ngIf="productForm.get('brand').hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Rating</mat-label>
+            <input
+              type="number"
+              matInput
+              formControlName="{{ appConstant.forms.product.rating }}"
+              placeholder="Rating"
+            />
+            <mat-error *ngIf="productForm.get('rating').hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="productForm.get('rating').hasError('max')">
+              The maximum value will be <strong>{{ maxValue }}</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="f-center">
+        <button
+          color="warn"
+          mat-raised-button
+          type="submit"
+          [disabled]="productForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
